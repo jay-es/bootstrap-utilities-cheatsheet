@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node ./data/parse.mjs",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
