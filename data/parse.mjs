@@ -69,7 +69,7 @@ const parse = (lines) => {
 
     // セレクター
     if (line.endsWith("{")) {
-      // 閉じタグまでを配列に格納
+      // 閉じタグまでを変数に格納
       let contents = "";
       while (!lines[++current].endsWith("}")) {
         contents += `${lines[current].trim()}\n`;

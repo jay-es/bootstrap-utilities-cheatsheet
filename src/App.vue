@@ -8,15 +8,15 @@ const searchWord = ref("");
 </script>
 
 <template>
-  <header class="py-3 container-fluid bg-dark">
-    <div class="row row-cols-md-2 row-cols-lg-3">
-      <div class="col-md">
+  <header class="container-fluid py-3 bg-dark">
+    <div class="d-md-flex align-items-center row-cols-xl-3">
+      <div class="flex-grow-1">
         <h1 class="h4 mb-0 text-white">Bootstrap Utilities Cheatsheet</h1>
       </div>
-      <small class="col-md text-md-end order-lg-3">
-        <span class="text-muted">Bootstrap Version: 4.6.2</span>
-      </small>
-      <div class="col-md order-lg-2 mt-2 mt-lg-0">
+      <div class="flex-grow-1 order-md-3 text-md-end">
+        <small class="text-muted">Bootstrap Version: 4.6.2</small>
+      </div>
+      <div class="flex-grow-1 order-md-2 mt-2 mt-md-0">
         <input
           v-model="searchWord"
           class="form-control"
@@ -38,7 +38,7 @@ const searchWord = ref("");
     </div>
   </main>
 
-  <footer class="py-2 text-center text-muted">&copy;jay-es</footer>
+  <footer class="py-2 text-center text-muted">&copy;2022 jay-es</footer>
 </template>
 
 <style scoped lang="scss">

@@ -9,7 +9,7 @@ defineProps<{ section: Section; searchWord: string }>();
 <template>
   <div class="card mb-3">
     <div class="card-body">
-      <h5 class="card-title h6">{{ section.title }}</h5>
+      <h2 class="card-title h6">{{ section.title }}</h2>
 
       <div class="table-responsive">
         <table class="table table-sm mb-0">
