@@ -4,8 +4,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import prettier from "prettier";
 
-/** @typedef {{ title: string, styles: Style[] }} Section */
-/** @typedef {{ selector: string, contents: string[] }} Style */
+/** @typedef {import('../src/types').Section} Section */
+/** @typedef {import('../src/types').Style} Style */
 
 /**
  * @param {string} str
@@ -13,7 +13,9 @@ import prettier from "prettier";
  */
 const format = (str) => {
   // フォーマットして配列に
-  const lines = prettier.format(str, { parser: "css" }).split("\n");
+  const lines = prettier
+    .format(str, { parser: "css", printWidth: 1e3 })
+    .split("\n");
 
   /** @type {string[]} */
   const formatted = [];
@@ -68,10 +70,9 @@ const parse = (lines) => {
     // セレクター
     if (line.endsWith("{")) {
       // 閉じタグまでを配列に格納
-      /** @type {string[]} */
-      const contents = [];
+      let contents = "";
       while (!lines[++current].endsWith("}")) {
-        contents.push(lines[current].trim());
+        contents += `${lines[current].trim()}\n`;
       }
 
       // spacing はセレクターをバラしてスタイルに反映
@@ -85,9 +86,9 @@ const parse = (lines) => {
         for (const selector of selectors) {
           const style = styles.find((v) => v.selector === selector);
           if (style) {
-            style.contents.push(...contents);
+            style.contents += contents;
           } else {
-            styles.push({ selector, contents: [...contents] });
+            styles.push({ selector, contents });
           }
         }
       } else {
