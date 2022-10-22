@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import type { Style } from "@/types";
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 
-const props = defineProps<{ style: Style }>();
+const props = defineProps<{ style: Style; searchWord: string }>();
 const selector = props.style.selector.split(", ").join("\n");
+
+const visible = computed(() => {
+  const { searchWord, style } = props;
+
+  return (
+    !searchWord ||
+    style.selector.includes(searchWord) ||
+    style.contents.includes(searchWord)
+  );
+});
 </script>
 
 <template>
-  <tr>
+  <tr v-show="visible">
     <td class="selector">
       <pre><code>{{ selector }}</code></pre>
     </td>

@@ -3,7 +3,7 @@ import type { Section } from "@/types";
 import { defineProps } from "vue";
 import StyleBox from "./StyleBox.vue";
 
-defineProps<{ section: Section }>();
+defineProps<{ section: Section; searchWord: string }>();
 </script>
 
 <template>
@@ -18,6 +18,7 @@ defineProps<{ section: Section }>();
               v-for="style in section.styles"
               :key="style.selector"
               :style="style"
+              :searchWord="searchWord"
             />
           </tbody>
         </table>
