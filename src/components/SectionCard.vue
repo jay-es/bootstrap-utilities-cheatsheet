@@ -7,7 +7,7 @@ defineProps<{ section: Section; searchWord: string }>();
 </script>
 
 <template>
-  <div class="card mb-3">
+  <div class="card">
     <div class="card-body">
       <h2 class="card-title h6">{{ section.title }}</h2>
 
@@ -28,10 +28,6 @@ defineProps<{ section: Section; searchWord: string }>();
 </template>
 
 <style scoped lang="scss">
-.card {
-  break-inside: avoid;
-}
-
 .table-responsive {
   $scrollbar-size: 8px;
 

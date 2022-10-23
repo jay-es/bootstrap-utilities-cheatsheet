@@ -38,15 +38,16 @@ const searchWord = ref("");
     </div>
   </main>
 
-  <footer class="py-2 text-center text-muted">&copy;2022 jay-es</footer>
+  <footer class="pb-3 text-center">
+    <small class="text-muted">&copy;2022 jay-es</small>
+  </footer>
 </template>
 
 <style scoped lang="scss">
-main {
-  background-color: var(--bs-gray-100);
-}
-
 .masonry {
+  $space: 1rem;
+  column-gap: $space;
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
@@ -59,6 +60,11 @@ main {
     column-count: 4;
   }
   @media (min-width: 1400px) {
+  }
+
+  > .card {
+    margin-bottom: $space;
+    break-inside: avoid;
   }
 }
 </style>
