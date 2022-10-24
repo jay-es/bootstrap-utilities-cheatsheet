@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Section } from "@/types";
 import { defineProps } from "vue";
-import StyleBox from "./StyleBox.vue";
+import StyleTableRow from "./StyleTableRow.vue";
 
 defineProps<{ section: Section; searchWord: string }>();
 </script>
@@ -14,7 +14,7 @@ defineProps<{ section: Section; searchWord: string }>();
       <div class="table-responsive">
         <table class="table table-sm mb-0">
           <tbody class="border-top align-text-top">
-            <StyleBox
+            <StyleTableRow
               v-for="style in section.styles"
               :key="style.selector"
               :style="style"
