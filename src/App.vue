@@ -44,6 +44,11 @@ const searchWord = ref("");
 </template>
 
 <style scoped lang="scss">
+// main より膨らんで見えるので 1px だけ内側に入れる
+header > div {
+  padding: 0 1px;
+}
+
 .masonry {
   $space: 1rem;
   column-gap: $space;
