@@ -1,6 +1,6 @@
-# Bootstrap Utilities Cheatsheet
+# Bootstrap Utilities Cheat Sheet
 
-All Bootstrap 4 utility classes.
+All Bootstrap utility classes.
 
 made with
 - create-vue

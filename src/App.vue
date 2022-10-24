@@ -11,7 +11,7 @@ const searchWord = ref("");
   <header class="container-fluid py-3 bg-dark">
     <div class="d-md-flex align-items-center row-cols-xl-3">
       <div class="flex-grow-1">
-        <h1 class="h4 mb-0 text-white">Bootstrap Utilities Cheatsheet</h1>
+        <h1 class="h4 mb-0 text-white">Bootstrap Utilities Cheat Sheet</h1>
       </div>
       <div class="flex-grow-1 order-md-3 text-md-end">
         <small class="text-muted">Bootstrap Version: 4.6.2</small>
