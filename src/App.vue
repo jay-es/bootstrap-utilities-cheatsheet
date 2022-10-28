@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SectionCard from "@/components/SectionCard.vue";
 
-import sections from "@/assets/data.json";
+import sections from "@/assets/data4.6.2.json";
 import { ref } from "vue";
 
 const searchWord = ref("");
