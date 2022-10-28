@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
+import type { Version } from "@/lib/version";
 import type { Section } from "@/types";
-
-type Version = "462" | "502";
-const versions: Record<Version, string> = {
-  462: "4.6.2",
-  502: "5.0.2",
-};
+import { ref, watchEffect } from "vue";
+import { getStorageVersion, setStorageVersion, versions } from "@/lib/version";
 
 const emit = defineEmits<{
   (event: "change", sections: Section[]): void;
 }>();
 
-const version = ref<Version>("462");
+const version = ref<Version>(getStorageVersion());
 
 watchEffect(async () => {
   if (version.value === "462") {
@@ -20,6 +16,8 @@ watchEffect(async () => {
   } else if (version.value === "502") {
     emit("change", (await import("@/assets/data5.0.2.json")).default);
   }
+
+  setStorageVersion(version.value);
 });
 </script>
 
