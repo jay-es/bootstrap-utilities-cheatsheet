@@ -67,6 +67,11 @@ const parse = (lines) => {
       continue;
     }
 
+    // ブロックコメントは終わりまでスキップ
+    if (line.startsWith("/*")) {
+      while (!lines[++current].endsWith("*/")) {} // eslint-disable-line no-empty
+    }
+
     // セレクター
     if (line.endsWith("{")) {
       // 閉じタグまでを変数に格納
@@ -123,3 +128,4 @@ const convert = async (inputFile, outputFile) => {
 };
 
 convert("bootstrap-utilities4.6.2.css", "data4.6.2.json");
+convert("bootstrap-utilities5.0.2.css", "data5.0.2.json");
