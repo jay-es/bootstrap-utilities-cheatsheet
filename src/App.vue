@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import SectionCard from "@/components/SectionCard.vue";
-
-import sections from "@/assets/data4.6.2.json";
 import { ref } from "vue";
+import SectionCard from "@/components/SectionCard.vue";
+import VersionSelector from "@/components/VersionSelector.vue";
+import type { Section } from "@/types";
 
+const sections = ref<Section[]>([]);
 const searchWord = ref("");
 </script>
 
@@ -14,7 +15,7 @@ const searchWord = ref("");
         <h1 class="h4 mb-0 text-white">Bootstrap Utilities Cheat Sheet</h1>
       </div>
       <div class="flex-grow-1 order-md-3 text-md-end">
-        <small class="text-muted">Bootstrap Version: 4.6.2</small>
+        <VersionSelector @change="sections = $event" />
       </div>
       <div class="flex-grow-1 order-md-2 mt-2 mt-md-0">
         <input
