@@ -129,6 +129,9 @@ const convert = async (inputFile, outputFile) => {
   await fs.writeFile(outputPath, JSON.stringify(sections, null, 2));
 };
 
-convert("bootstrap-utilities4.6.2.css", "data4.6.2.json");
-convert("bootstrap-utilities5.0.2.css", "data5.0.2.json");
-convert("bootstrap-utilities5.2.2.css", "data5.2.2.json");
+const versions = ["4.6.2", "5.0.2", "5.2.2"];
+await Promise.all(
+  versions.map((version) =>
+    convert(`bootstrap-utilities${version}.css`, `data${version}.json`)
+  )
+);
