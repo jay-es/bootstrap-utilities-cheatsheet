@@ -52,24 +52,26 @@ const parse = (lines) => {
   while (current < lines.length) {
     const line = lines[current];
 
-    // 行コメントは新しいセクション
-    if (/^\/\*.+\*\/$/.test(line)) {
-      if (currentSection.title) {
-        sections.push(currentSection);
+    // コメント
+    if (line.startsWith("/*")) {
+      // 行コメントは新しいセクション
+      if (line.endsWith("*/")) {
+        if (currentSection.styles.length) {
+          sections.push(currentSection);
+        }
+
+        currentSection = {
+          title: line.slice(2, -2).trim(),
+          styles: [],
+        };
+
+        current++;
+      } else {
+        // ブロックコメントは終わりまでスキップ
+        while (!lines[++current].endsWith("*/")) {} // eslint-disable-line no-empty
       }
 
-      currentSection = {
-        title: line.slice(2, -2).trim(),
-        styles: [],
-      };
-
-      current++;
       continue;
-    }
-
-    // ブロックコメントは終わりまでスキップ
-    if (line.startsWith("/*")) {
-      while (!lines[++current].endsWith("*/")) {} // eslint-disable-line no-empty
     }
 
     // セレクター
