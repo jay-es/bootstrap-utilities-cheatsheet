@@ -1,8 +1,9 @@
-export type Version = "462" | "502";
+export type Version = "462" | "502" | "522";
 
 export const versions: Record<Version, string> = {
   462: "4.6.2",
   502: "5.0.2",
+  522: "5.2.2",
 };
 
 const STORAGE_NAME = "version";

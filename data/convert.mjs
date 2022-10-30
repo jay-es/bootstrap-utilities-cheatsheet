@@ -131,3 +131,4 @@ const convert = async (inputFile, outputFile) => {
 
 convert("bootstrap-utilities4.6.2.css", "data4.6.2.json");
 convert("bootstrap-utilities5.0.2.css", "data5.0.2.json");
+convert("bootstrap-utilities5.2.2.css", "data5.2.2.json");

@@ -15,6 +15,8 @@ watchEffect(async () => {
     emit("change", (await import("@/assets/data4.6.2.json")).default);
   } else if (version.value === "502") {
     emit("change", (await import("@/assets/data5.0.2.json")).default);
+  } else if (version.value === "522") {
+    emit("change", (await import("@/assets/data5.2.2.json")).default);
   }
 
   setStorageVersion(version.value);
