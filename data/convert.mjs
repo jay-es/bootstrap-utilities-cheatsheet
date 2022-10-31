@@ -129,6 +129,7 @@ const convert = async (inputFile, outputFile) => {
   await fs.writeFile(outputPath, JSON.stringify(sections, null, 2));
 };
 
+/** @type {import('../src/lib/version').Version[]} */
 const versions = ["4.6.2", "5.0.2", "5.2.2"];
 await Promise.all(
   versions.map((version) =>

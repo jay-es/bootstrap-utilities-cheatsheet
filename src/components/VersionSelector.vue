@@ -8,27 +8,20 @@ const emit = defineEmits<{
   (event: "change", sections: Section[]): void;
 }>();
 
-const version = ref<Version>(getStorageVersion());
+const selected = ref<Version>(getStorageVersion());
 
 watchEffect(async () => {
-  if (version.value === "462") {
-    emit("change", (await import("@/assets/data4.6.2.json")).default);
-  } else if (version.value === "502") {
-    emit("change", (await import("@/assets/data5.0.2.json")).default);
-  } else if (version.value === "522") {
-    emit("change", (await import("@/assets/data5.2.2.json")).default);
-  }
-
-  setStorageVersion(version.value);
+  emit("change", (await import(`@/assets/data${selected.value}.json`)).default);
+  setStorageVersion(selected.value);
 });
 </script>
 
 <template>
   <small class="version-selector">
     Bootstrap Version:
-    <select v-model="version" class="bg-dark border-secondary rounded-1">
-      <option v-for="(text, key) in versions" :key="key" :value="key">
-        {{ text }}
+    <select v-model="selected" class="bg-dark border-secondary rounded-1">
+      <option v-for="version in versions" :key="version" :value="version">
+        {{ version }}
       </option>
     </select>
   </small>
