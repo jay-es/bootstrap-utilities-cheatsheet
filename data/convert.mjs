@@ -52,18 +52,25 @@ const parse = (lines) => {
   while (current < lines.length) {
     const line = lines[current];
 
-    // コメントは新しいセクション
-    if (/^\/\*.+\*\/$/.test(line)) {
-      if (currentSection.title) {
-        sections.push(currentSection);
+    // コメント
+    if (line.startsWith("/*")) {
+      // 行コメントは新しいセクション
+      if (line.endsWith("*/")) {
+        if (currentSection.styles.length) {
+          sections.push(currentSection);
+        }
+
+        currentSection = {
+          title: line.slice(2, -2).trim(),
+          styles: [],
+        };
+
+        current++;
+      } else {
+        // ブロックコメントは終わりまでスキップ
+        while (!lines[++current].endsWith("*/")) {} // eslint-disable-line no-empty
       }
 
-      currentSection = {
-        title: line.slice(2, -2).trim(),
-        styles: [],
-      };
-
-      current++;
       continue;
     }
 
@@ -107,14 +114,25 @@ const parse = (lines) => {
   return sections;
 };
 
-const dir = path.dirname(fileURLToPath(import.meta.url));
-const cssFile = await fs.readFile(
-  path.resolve(dir, "./bootstrap-utilities_no-media.css"),
-  { encoding: "utf-8" }
-);
-const formatted = format(cssFile);
-const sections = parse(formatted);
-await fs.writeFile(
-  path.resolve(dir, "../src/assets/data.json"),
-  JSON.stringify(sections, null, 2)
+/**
+ * @param {string} inputFile
+ * @param {string} outputFile
+ */
+const convert = async (inputFile, outputFile) => {
+  const dir = path.dirname(fileURLToPath(import.meta.url));
+  const inputPath = path.resolve(dir, inputFile);
+  const outputPath = path.resolve(dir, "../src/assets", outputFile);
+
+  const cssFile = await fs.readFile(inputPath, { encoding: "utf-8" });
+  const formatted = format(cssFile);
+  const sections = parse(formatted);
+  await fs.writeFile(outputPath, JSON.stringify(sections, null, 2));
+};
+
+/** @type {import('../src/lib/version').Version[]} */
+const versions = ["4.6.2", "5.0.2", "5.2.2"];
+await Promise.all(
+  versions.map((version) =>
+    convert(`bootstrap-utilities${version}.css`, `data${version}.json`)
+  )
 );
